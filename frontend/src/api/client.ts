@@ -75,6 +75,12 @@ export const acknowledgeAlert = (id: string, operator: string, notes?: string) =
     api.patch(`/alerts/${id}/acknowledge`, null, { params: { operator, notes } }).then(r => r.data)
 export const resolveAlert = (id: string) => api.patch(`/alerts/${id}/resolve`).then(r => r.data)
 export const getAlertStats = () => api.get('/alerts/stats').then(r => r.data)
+export const dispatchPcr = (id: string, unitCallsign?: string) =>
+    api.post(`/alerts/${id}/dispatch_pcr`, null, { params: { unit_callsign: unitCallsign } }).then(r => r.data)
+export const broadcastWirelessFlash = (id: string) =>
+    api.post(`/alerts/${id}/broadcast_flash`).then(r => r.data)
+export const issueNakabandi = (id: string) =>
+    api.post(`/alerts/${id}/nakabandi`).then(r => r.data)
 
 // ─── Watchlist ──────────────────────────────────────────────────
 export const getWatchlist = () => api.get('/watchlist').then(r => r.data)

@@ -56,8 +56,11 @@ CREATE TABLE IF NOT EXISTS detections (
     crop_uri     TEXT,
     vehicle_type TEXT,
     raw_reads    JSONB DEFAULT '[]',
-    bbox         JSONB
+    bbox         JSONB,
+    tags         JSONB NOT NULL DEFAULT '[]',
+    notes        TEXT
 );
+CREATE INDEX IF NOT EXISTS idx_detections_tags        ON detections USING GIN(tags);
 
 CREATE INDEX IF NOT EXISTS idx_detections_camera_id   ON detections(camera_id);
 CREATE INDEX IF NOT EXISTS idx_detections_plate_text  ON detections(plate_text);
