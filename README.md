@@ -45,10 +45,7 @@ vehicle route reconstruction across cameras, and an audited output report.
 
 ### Whole stack, one command
 
-```bash
-cp backend/.env.example .env    # sandbox credentials, SECRET_KEY, AUTH_ENABLED=true
-docker compose up -d --build    # console on :8080 · API on :8000
-```
+
 
 Brings up PostGIS, the API, the console behind nginx, and the continuous ANPR
 indexer. Sign in with the demonstration accounts below.
@@ -61,7 +58,7 @@ PostGIS. No GPU is required — all inference runs on CPU.
 ```bash
 # 1 · Database
 docker run -d --name sentinel-db -p 5432:5432 \
-  -e POSTGRES_PASSWORD=sentinel postgis/postgis:16-3.4
+  
 psql "$DATABASE_URL" -c "CREATE EXTENSION IF NOT EXISTS postgis;"
 psql "$DATABASE_URL" -c "CREATE EXTENSION IF NOT EXISTS pg_trgm;"
 
@@ -88,7 +85,7 @@ The camera registry populates itself from the sandbox catalogue on first start.
 `backend/.env` — see `.env.example` for the full list:
 
 ```ini
-DATABASE_URL=postgresql+psycopg://user:pass@host:5432/sentinel
+DATABASE_URL=
 SENTINEL_USER_EMAIL=your-registered-email
 SENTINEL_USER_PASSWORD=your-sandbox-password
 SECRET_KEY=change-me
@@ -101,14 +98,7 @@ the operator through an authenticated proxy that holds the sandbox session.
 
 ### Signing in
 
-Three accounts are seeded on first start. **Change these before exposing the
-platform to anyone.**
 
-| Role | Email | Password | Grants |
-|---|---|---|---|
-| State admin | `admin@sentinel.gujarat.gov.in` | `sentinel-demo-2026` | Everything, including the audit trail |
-| Dept operator | `operator@sentinel.gujarat.gov.in` | `operator-demo-2026` | Search, watchlist, alerts, reports |
-| Viewer | `viewer@sentinel.gujarat.gov.in` | `viewer-demo-2026` | Map and live viewing only |
 
 `AUTH_ENABLED` defaults to `false` so the pipeline can be demonstrated locally
 without signing in. **Set it to `true` for any deployed instance** — roles are
