@@ -8,7 +8,6 @@ onboarded and mapped, a continuous ANPR pipeline over live RTSP feeds validated 
 100% on legible footage, automatic watchlist matching with real-time alerts,
 vehicle route reconstruction across cameras, and an audited output report.
 
-
 ## What it does
 
 | | |
